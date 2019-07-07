@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block style %}
+    .join-form-outer {
+        display: grid;
+        height: 850px;
+        border: 2px dashed rgba(114, 186, 94, 0.35);
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-rows: repeat(5, 20%);
+    }
+
+    .join-form-outer > div {
+        border: 2px dashed rgba(236, 198, 48, .5);
+    }
+
+    .join-head {
+        grid-area: 1 / 1 / 2 / 6;
+        display: grid;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .join-form {
+        grid-area: 2 / 2 / 5 / 3;
+        display: grid;
+        border: 2px dashed rgba(114, 186, 94, 0.35);
+        justify-content: center;
+        align-content: center;
+        grid-gap: 3px;
+    }
+
+
+    .first-name, .last-name, .email, .medium, .submit-grid {
+        font-size: 24px;
+        padding: 10px;
+    }
+
+    .submit-grid{
+        display: grid;
+        justify-content: center;
+        align-content: center;
+    }
+
+    input[type=submit] {
+        font-size: 24px;
+    }
+
+    input[type=text] {
+        height: 30px;
+        font-size: 24px;
+    }
+
+    .medium-list {
+        grid-area: 2 / 3 / 5 / -1;
+        padding: 25px;
+    }
+
+
+{% endblock %}
+
+{% block content %}
+<div class="join-form-outer">
+    <div class="join-head">
+        <h1> Join the Directory </h1>
+    </div>
+    <div class="join-form">
+        <form action="" method="post" enctype="multipart/form-data" novalidate>
+            {{ form.hidden_tag() }}
+            <div class="first-name">
+                <p>
+                    {{ form.first_name.label }}<br>
+                    {{ form.first_name(size=64) }}
+                    {% for error in form.first_name.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="last-name">
+                <p>
+                    {{ form.last_name.label }}<br>
+                    {{ form.last_name(size=64) }}
+                    {% for error in form.last_name.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="email">
+                <p>
+                    {{ form.email.label }}<br>
+                    {{ form.email(size=64) }}
+                    {% for error in form.email.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="medium">
+                <p>
+                    {{ form.medium.label }}<br>
+                    {{ form.medium }}
+                    {% for error in form.medium.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="photo">
+                <p>
+                    <input type="file" name="photo">
+                </p>
+            </div>
+            <div class="submit-grid">
+                <div class="submit">
+                    <p> {{ form.submit() }}</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="medium-list">
+        {% for error in form.medium.errors %}
+            <ul>
+            {% for medium in mediums %}
+                <li>{{ medium }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

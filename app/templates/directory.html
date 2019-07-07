@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block style %}
+    .artists {
+        display: grid;
+        height: auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        grid-gap: 15px;
+        border: 2px dashed rgba(114, 186, 94, 0.35);
+        justify-items: center;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .artists > * {
+        display: grid;
+        border: 2px dashed rgba(236, 198, 48, .5);
+        justify-items: center;
+        align-items: center;
+        margin: 10px;
+    }
+
+    .info {
+        text-align: center;
+    }
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="artists">
+    {% for u in user %}
+        <div class="{{ u.email }}">
+            <img src="static\{{ u.id }}.jpg" width="200" height="300"/>
+            <br>
+            <div class="info">
+                {{ u.first_name }} {{ u.last_name }}<br>
+                {{ u.medium }}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

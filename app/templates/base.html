@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+    <title>{{ title }} - PiC</title>
+    {% else %}
+    <title> Portland in Color </title>
+    {% endif %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .head {
+            display: grid;
+            border: 2px dashed rgba(114, 186, 94, 0.35);
+            height: 250px;
+            grid-template-columns: repeat(5, 20%);
+            grid-template-rows: 80% 20%;
+            background: black;
+            }
+
+        .head > div {
+            border: 2px dashed rgba(236, 198, 48, .5); }
+
+        .head3, .head5{
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            color: white;
+            }
+
+        .nav {
+            grid-column: 2 / 5;
+            display: grid;
+            border: 2px dashed rgba(114, 186, 94, 0.35);
+            grid-template-columns: repeat(5, 20%);
+            grid-template-rows: 100%;}
+
+        .nav > div {
+            border: 2px dashed rgba(236, 198, 48, 0.5);
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            color: white;
+            }
+        {% block style %}{% endblock %}
+
+    </style>
+</head>
+<body>
+    <div class="front-page">
+        <div class="head">
+            <div class="head1">1</div>
+            <div class="head2">2</div>
+            <div class="head3">
+                <div class="head3-text">Portland in Color</div>
+            </div>
+            <div class="head4">4</div>
+            <div class="head5">
+                <div class="head5-text"><a href="{{ url_for('join_directory') }}">Join Today!</a></div>
+            </div>
+            <div class="nav">
+                <div class="link1">
+                    <div class="link-text"><a href="{{ url_for('index') }}">Home</a></div>
+                </div>
+                <div class="link2">
+                    <div class="link-text"><a href="{{ url_for('features') }}">Features</a></div>
+                </div>
+                <div class="link3">
+                    <div class="link-text"><a href="{{ url_for('directory') }}">Directory</a></div>
+                </div>
+                <div class="link4">
+                    <div class="link-text"><a href="{{ url_for('about') }}">About</a></div>
+                </div>
+                <div class="link5">
+                    <div class="link-text">Get Involved</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+{% block content %}{% endblock %}
+
+
+</body>
+</html>
